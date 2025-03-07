@@ -1,0 +1,11 @@
+.ant-menu-light {
+    background: transparent;
+    color: #ffffff;
+}
+
+.ant-layout-header {
+    background: transparent;
+}
+
+.ant-menu-horizontal {
+    border-bottom: none;
