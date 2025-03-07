@@ -52,7 +52,15 @@ jobs:
           REACT_ENV: ${{ secrets.REACT_ENV }}
         shell: bash
         run: |- 
-           echo "${{ secrets.REACT_ENV }}" > .env           
+           echo "${{ secrets.REACT_ENV }}" > .env
+      
+      - name: 'Docker Auth'
+        uses: 'docker/login-action@v3'
+        with:
+          username: 'oauth2accesstoken'
+          password: '${{ steps.auth.outputs.access_token }}'
+          registry: '${{ env.LOCATION }}-docker.pkg.dev'    
+           
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v3
