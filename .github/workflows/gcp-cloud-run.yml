@@ -19,14 +19,14 @@ on:
           - debug
 env:
   PORT: 8080
-  LOCATION: europe-west1
+  LOCATION: europe-west6
   AUTO_SCALING: 1
   TIMEOUT: 8s
   CPU: 2
   MEMORY: 512Mi  
   MAX_REQUESTS_PER_CONTAINER: 5
   MIN_REQUESTS_PER_CONTAINER: 1
-  PROJECT_ID: react-cloud-run-deploy
+  PROJECT_ID: react-cloud-run-deploy-452614
   APP_NAME: react-gcp-cloud-run
   
 permissions:
@@ -42,8 +42,8 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: 'projects/746725945847/locations/global/workloadIdentityPools/tutorial-github-pool/providers/tutorial-github-provider'
-          service_account: 'gcp-github-actions@react-cloud-run-deploy.iam.gserviceaccount.com'
+          workload_identity_provider: 'projects/214898504450/locations/global/workloadIdentityPools/tutorial-github-pool/providers/tutorial-github-provider'
+          service_account: 'gcp-github-actions@react-cloud-run-deploy-452614.iam.gserviceaccount.com'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
       #Setup .env file    
