@@ -67,7 +67,8 @@ jobs:
       - name: Authorize Docker push
         run: gcloud auth configure-docker #europe-west6-docker.pkg.dev --quiet
       - name: Push GCR.io
-        run: docker push gcr.io/$PROJECT_ID/$APP_NAME:${{ github.sha }}
+        run: docker push gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }}
+        #run: docker push gcr.io/$PROJECT_ID/$APP_NAME:${{ github.sha }}
       - name: Deploy to gcloud run to PROD
         if: github.ref == 'refs/heads/main'
         run: gcloud run deploy ${{env.APP_NAME}} --image="gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }}" 
