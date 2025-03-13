@@ -54,9 +54,20 @@ jobs:
         run: |- 
            echo "${{ secrets.REACT_ENV }}" > .env
           
-      - name: Build and Push Image
-        run: |
-          docker build -t europe-west6-docker.pkg.dev/react-cloud-run-deploy-452614/gcr-repo/${{ github.sha }} .
-          docker push europe-west6-docker.pkg.dev/react-cloud-run-deploy-452614/gcr-repo/${{ github.sha }}​      
+      - name: Build and push
+           id: docker_build
+           uses: docker/build-push-action@v3
+           with:
+             context: ./
+             file: ./Dockerfile
+             push: false
+             tags: |-
+               gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }} 
+               gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:latest
+      - name: Push GCR.io
+        run: docker push gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }} 
+
+               
+             
       
      
