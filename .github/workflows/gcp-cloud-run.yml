@@ -54,23 +54,9 @@ jobs:
         run: |- 
            echo "${{ secrets.REACT_ENV }}" > .env
           
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v3
-        with:
-          context: ./
-          file: ./Dockerfile
-          push: false
-          tags: |-
-            gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }} 
-            gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:latest
-      - name: Authorize Docker push
-        run: gcloud auth configure-docker "${{ env.LOCATION }}-docker.pkg.dev"
-      - name: Push GCR.io
-        run: docker push gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }}
-      - name: Deploy to gcloud run to PROD
-        if: github.ref == 'refs/heads/main'
-        run: gcloud run deploy ${{env.APP_NAME}} --image="gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }}" 
-             --port=${{env.PORT}} --allow-unauthenticated --project=${{env.PROJECT_ID}} --region=${{env.LOCATION}} --memory=${{env.MEMORY}}
-             --timeout=${{env.TIMEOUT}} --memory=${{env.MEMORY}} --max-instances=${{env.MAX_REQUESTS_PER_CONTAINER}} --min-instances=${{env.MIN_REQUESTS_PER_CONTAINER}} 
-             --set-env-vars NODE_ENV=production --concurrency=${{env.AUTO_SCALING}}
+      - name: Build and Push Image
+          run: |
+            docker build -t europe-west6-docker.pkg.dev/react-cloud-run-deploy-452614/gcr-repo/${{ github.sha }} .
+            docker push europe-west6-docker.pkg.dev/react-cloud-run-deploy-452614/gcr-repo/${{ github.sha }}​      
+      
+     
