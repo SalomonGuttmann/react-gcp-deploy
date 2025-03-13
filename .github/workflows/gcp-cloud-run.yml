@@ -57,6 +57,6 @@ jobs:
       - name: Build and Push Image
         run: |
           docker build -t europe-west6-docker.pkg.dev/react-cloud-run-deploy-452614/gcr-repo/${{ github.sha }} .
-          docker push europe-west6-docker.pkg.dev/react-cloud-run-deploy-452614/gcr-repo/${{ github.sha }}​      
+        #  docker push europe-west6-docker.pkg.dev/react-cloud-run-deploy-452614/gcr-repo/${{ github.sha }}​      
       
      
