@@ -55,9 +55,9 @@ jobs:
            echo "${{ secrets.REACT_ENV }}" > .env
           
       - name: Build and Push Image
-           run: |
-             docker build -t europe-west6-docker.pkg.dev/gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }} .
-             docker push europe-west6-docker.pkg.dev/gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }}
+        run: |
+          docker build -t europe-west6-docker.pkg.dev/gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }} .
+          docker push europe-west6-docker.pkg.dev/gcr.io/${{env.PROJECT_ID}}/${{env.APP_NAME}}:${{ github.sha }}
 
                
              
