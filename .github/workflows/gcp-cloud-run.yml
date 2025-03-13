@@ -56,8 +56,8 @@ jobs:
           
       - name: Build and Push Image
         run: |
-          docker build -t europe-west6-docker.pkg.dev/${{env.PROJECT_ID}}/react-gcp-deploy:${{ github.sha }} .
-          docker push europe-west6-docker.pkg.dev/${{env.PROJECT_ID}}/react-gcp-deploy:${{ github.sha }} 
+          docker build -t europe-west6-docker.pkg.dev/${{env.PROJECT_ID}}:${{ github.sha }} .
+          docker push europe-west6-docker.pkg.dev/${{env.PROJECT_ID}}:${{ github.sha }} 
 
                
              
